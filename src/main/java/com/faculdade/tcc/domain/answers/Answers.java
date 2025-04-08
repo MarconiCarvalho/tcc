@@ -1,5 +1,6 @@
 package com.faculdade.tcc.domain.answers;
 
+import com.faculdade.tcc.domain.dtos.AnswersDTO;
 import com.faculdade.tcc.domain.question.Question;
 import com.faculdade.tcc.domain.user.User;
 import jakarta.persistence.*;
@@ -27,4 +28,10 @@ public class Answers {
     @ManyToOne
     @JoinColumn(name = "ID_USER")
     private User idUser;
+
+    public Answers(AnswersDTO data){
+        this.option = data.option();
+        this.idQuestion = data.idQuestion();
+        this.idUser = data.idUser();
+    }
 }

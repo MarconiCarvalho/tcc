@@ -28,6 +28,7 @@ public class QuestionService {
     public List<Question> findAllQuestion(){
       return this.questionRepository.findAll();
     }
+
     public void findById(Long id) throws Exception {
         this.questionRepository.findById(id).orElseThrow(() -> new Exception("Question not found"));
     }
@@ -35,4 +36,6 @@ public class QuestionService {
     public void deleteQuestionById(Long id){
         this.questionRepository.deleteById(id);
     }
+
+
 }

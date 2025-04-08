@@ -1,7 +1,7 @@
 package com.faculdade.tcc.domain.question;
 
 import com.faculdade.tcc.domain.dtos.QuestionDTO;
-import com.faculdade.tcc.domain.questionnaire.Questionnaire;
+import com.faculdade.tcc.domain.questionnaire.Questionnarie;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public class Question {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "ID_QUESTIONNAIRE")
-    private Questionnaire idQuestionnaire;
+    private Questionnarie idQuestionnaire;
     private String description;
     private Integer ordem;
 
