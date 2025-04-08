@@ -1,5 +1,6 @@
 package com.faculdade.tcc.domain.question;
 
+import com.faculdade.tcc.domain.dtos.QuestionDTO;
 import com.faculdade.tcc.domain.questionnaire.Questionnaire;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,4 +24,10 @@ public class Question {
     private Questionnaire idQuestionnaire;
     private String description;
     private Integer ordem;
+
+    public Question(QuestionDTO data){
+        this.idQuestionnaire = data.idQuestionnaire();
+        this.description = data.description();
+        this.ordem = data.ordem();
+    }
 }
