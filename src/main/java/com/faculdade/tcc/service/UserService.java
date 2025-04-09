@@ -15,7 +15,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User saveUser(UserDTO data){
+    public User createUser(UserDTO data){
         User newUser = new User(data);
         this.saveUser(newUser);
         return newUser;
