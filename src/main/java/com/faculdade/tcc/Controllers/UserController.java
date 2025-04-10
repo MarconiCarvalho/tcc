@@ -1,6 +1,7 @@
 package com.faculdade.tcc.Controllers;
 
 import com.faculdade.tcc.domain.dtos.UserDTO;
+import com.faculdade.tcc.domain.responses.UserResponseDTO;
 import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,15 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserDTO user){
+    public ResponseEntity<User> createUser(@RequestBody UserDTO user, UserResponseDTO response){
         User newUser = userService.createUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAllUsers(){
-        List<User> users = this.userService.findAllUsers();
-        return  new ResponseEntity<>(users, HttpStatus.OK);
+    public ResponseEntity<List<UserResponseDTO>> findAllUsers(){
+        List<User> users = userService.findAllUsers();
+        List<UserResponseDTO> response = users.stream().map(UserResponseDTO::new).toList();
+        return ResponseEntity.ok(response);
     }
 }

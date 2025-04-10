@@ -5,12 +5,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-@Entity(name = "USERS_TABLE")
+@Entity(name = "USER_TABLE")
 @Table(name = "USER_TABLE")
-@Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class User {
 
@@ -31,5 +28,44 @@ public class User {
         this.matricula = data.matricula();
         this.role = data.role();
     }
+
+    public User(){}
+
+    public Long getId(){
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public UserType getRole() {
+        return role;
+    }
+
+    public void setRole(UserType role) {
+        this.role = role;
+    }
+
+
 
 }
