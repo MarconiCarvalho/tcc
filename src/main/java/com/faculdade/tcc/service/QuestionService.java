@@ -1,9 +1,8 @@
 package com.faculdade.tcc.service;
 
 import com.faculdade.tcc.Repositories.QuestionRepository;
-import com.faculdade.tcc.domain.dtos.QuestionDTO;
+import com.faculdade.tcc.domain.dtos.requests.QuestionRequestDTO;
 import com.faculdade.tcc.domain.question.Question;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class QuestionService {
         this.saveQuestion(question);
     }
 
-    public Question createUser(QuestionDTO data){
+    public Question createUser(QuestionRequestDTO data){
         Question newQuestion = new Question(data);
         this.saveQuestion(newQuestion);
         return newQuestion;

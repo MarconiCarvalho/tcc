@@ -1,7 +1,7 @@
 package com.faculdade.tcc.Controllers;
 
-import com.faculdade.tcc.domain.dtos.UserDTO;
-import com.faculdade.tcc.domain.responses.UserResponseDTO;
+import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
+import com.faculdade.tcc.domain.dtos.responses.UserResponseDTO;
 import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserDTO user, UserResponseDTO response){
+    public ResponseEntity<User> createUser(@RequestBody UserRequestDTO user, UserResponseDTO response){
         User newUser = userService.createUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }

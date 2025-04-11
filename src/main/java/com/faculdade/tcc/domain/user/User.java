@@ -1,8 +1,10 @@
 package com.faculdade.tcc.domain.user;
 
-import com.faculdade.tcc.domain.dtos.UserDTO;
+import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.UUID;
 
 
 @Entity(name = "USER_TABLE")
@@ -13,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
     private String name;
     @Column(unique = true)
     private String email;
@@ -22,7 +24,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType role;
 
-    public User(UserDTO data){
+    public User(UserRequestDTO data){
         this.name = data.name();
         this.email = data.email();
         this.matricula = data.matricula();
@@ -31,7 +33,7 @@ public class User {
 
     public User(){}
 
-    public Long getId(){
+    public UUID getId(){
         return id;
     }
     public String getName() {

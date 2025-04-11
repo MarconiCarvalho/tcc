@@ -1,6 +1,6 @@
 package com.faculdade.tcc.domain.answers;
 
-import com.faculdade.tcc.domain.dtos.AnswersDTO;
+import com.faculdade.tcc.domain.dtos.requests.AnswersRequestDTO;
 import com.faculdade.tcc.domain.question.Question;
 import com.faculdade.tcc.domain.user.User;
 import jakarta.persistence.*;
@@ -9,17 +9,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.UUID;
+
 @Entity(name = "ANSWERS_TABLE")
 @Table(name = "ANSWERS_TABLE")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Answers {
+public class Answers implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
     @Enumerated(EnumType.STRING)
     private OptionAnswers option;
     @ManyToOne
@@ -29,7 +36,7 @@ public class Answers {
     @JoinColumn(name = "ID_USER")
     private User idUser;
 
-    public Answers(AnswersDTO data){
+    public Answers(AnswersRequestDTO data){
         this.option = data.option();
         this.idQuestion = data.idQuestion();
         this.idUser = data.idUser();

@@ -1,33 +1,65 @@
 package com.faculdade.tcc.domain.question;
 
-import com.faculdade.tcc.domain.dtos.QuestionDTO;
-import com.faculdade.tcc.domain.questionnaire.Questionnarie;
+import com.faculdade.tcc.domain.dtos.requests.QuestionRequestDTO;
+import com.faculdade.tcc.domain.questionnaire.Questionnaire;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.UUID;
 
 @Entity(name = "QUESTION_TABLE")
 @Table(name = "QUESTION_TABLE")
-@Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
-public class Question {
+public class Question implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
     @ManyToOne
     @JoinColumn(name = "ID_QUESTIONNAIRE")
-    private Questionnarie idQuestionnaire;
+    private Questionnaire idQuestionnaire;
     private String description;
-    private Integer ordem;
+    private Integer order;
 
-    public Question(QuestionDTO data){
+    public Question(QuestionRequestDTO data){
         this.idQuestionnaire = data.idQuestionnaire();
         this.description = data.description();
-        this.ordem = data.ordem();
+        this.order = data.order();
+    }
+
+    public Question(){}
+
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Questionnaire getIdQuestionnaire() {
+        return idQuestionnaire;
+    }
+
+    public void setIdQuestionnaire(Questionnaire idQuestionnaire) {
+        this.idQuestionnaire = idQuestionnaire;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrdem(Integer order) {
+        this.order = order;
     }
 }

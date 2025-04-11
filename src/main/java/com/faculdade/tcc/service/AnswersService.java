@@ -2,7 +2,7 @@ package com.faculdade.tcc.service;
 
 import com.faculdade.tcc.Repositories.AnswersRepository;
 import com.faculdade.tcc.domain.answers.Answers;
-import com.faculdade.tcc.domain.dtos.AnswersDTO;
+import com.faculdade.tcc.domain.dtos.requests.AnswersRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class AnswersService {
         this.answersRepository.save(answers);
     }
 
-    public Answers createAnswers(AnswersDTO data){
+    public Answers createAnswers(AnswersRequestDTO data){
         Answers newAnswers = new Answers(data);
         this.answersRepository.save(newAnswers);
         return newAnswers;

@@ -1,7 +1,7 @@
 package com.faculdade.tcc.service;
 
 import com.faculdade.tcc.Repositories.UserRepository;
-import com.faculdade.tcc.domain.dtos.UserDTO;
+import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(UserDTO data){
+    public User createUser(UserRequestDTO data){
         User newUser = new User(data);
         this.saveUser(newUser);
         return newUser;

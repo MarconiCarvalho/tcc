@@ -2,9 +2,8 @@ package com.faculdade.tcc.service;
 
 
 import com.faculdade.tcc.Repositories.QuestionnarieRepository;
-import com.faculdade.tcc.domain.dtos.QuestionDTO;
-import com.faculdade.tcc.domain.dtos.QuestionnarieDTO;
-import com.faculdade.tcc.domain.questionnaire.Questionnarie;
+import com.faculdade.tcc.domain.dtos.requests.QuestionnaireRequestDTO;
+import com.faculdade.tcc.domain.questionnaire.Questionnaire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +15,21 @@ public class QuestionnarieService  {
     @Autowired
     private QuestionnarieRepository questionnarieRepository;
 
-    public void saveQuestionnarie(Questionnarie questionnarie){
+    public void saveQuestionnarie(Questionnaire questionnarie){
         this.questionnarieRepository.save(questionnarie);
     }
 
-    public Questionnarie createQuestionnarie(QuestionnarieDTO questionnarieDTO){
-        Questionnarie newQuestionnarie = new Questionnarie(questionnarieDTO);
+    public Questionnaire createQuestionnarie(QuestionnaireRequestDTO questionnarieDTO){
+        Questionnaire newQuestionnarie = new Questionnaire(questionnarieDTO);
         this.questionnarieRepository.save(newQuestionnarie);
         return newQuestionnarie;
     }
 
-    public List<Questionnarie> findAllQuestionnarie(){
+    public List<Questionnaire> findAllQuestionnarie(){
         return this.questionnarieRepository.findAll();
     }
 
-    public Questionnarie findById(Long id){
+    public Questionnaire findById(Long id){
       return  this.questionnarieRepository.findById(id).orElseThrow(() -> new RuntimeException("Questionnarie not found"));
     }
 
