@@ -33,6 +33,7 @@ public class UserService {
         return this.userRepository.findById(id).orElseThrow(() -> new Exception("User not found"));
     }
 
+
     public void deleteUser(Long id)  {
         this.userRepository.deleteById(id);
     }

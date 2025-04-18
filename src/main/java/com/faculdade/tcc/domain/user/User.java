@@ -3,7 +3,6 @@ package com.faculdade.tcc.domain.user;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.UUID;
 
 
