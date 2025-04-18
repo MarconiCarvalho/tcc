@@ -20,14 +20,14 @@ public class User {
     @Column(unique = true)
     private String email;
     @Column(unique = true)
-    private String matricula;
+    private String registration;
     @Enumerated(EnumType.STRING)
     private UserType role;
 
     public User(UserRequestDTO data){
         this.name = data.name();
         this.email = data.email();
-        this.matricula = data.matricula();
+        this.registration = data.registration();
         this.role = data.role();
     }
 
@@ -52,12 +52,12 @@ public class User {
         this.email = email;
     }
 
-    public String getMatricula() {
-        return matricula;
+    public String getRegistration() {
+        return registration;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setRegistration(String registration) {
+        this.registration = registration;
     }
 
     public UserType getRole() {

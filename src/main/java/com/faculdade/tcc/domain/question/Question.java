@@ -4,11 +4,12 @@ import com.faculdade.tcc.domain.dtos.requests.QuestionRequestDTO;
 import com.faculdade.tcc.domain.questionnaire.Questionnaire;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.UUID;
-
+@Setter
 @Entity(name = "QUESTION_TABLE")
 @Table(name = "QUESTION_TABLE")
 @AllArgsConstructor
@@ -24,12 +25,12 @@ public class Question implements Serializable {
     @JoinColumn(name = "ID_QUESTIONNAIRE")
     private Questionnaire idQuestionnaire;
     private String description;
-    private Integer order;
+    private Integer idOrder;
 
     public Question(QuestionRequestDTO data){
         this.idQuestionnaire = data.idQuestionnaire();
         this.description = data.description();
-        this.order = data.order();
+        this.idOrder = data.idOrder();
     }
 
     public Question(){}
@@ -43,23 +44,15 @@ public class Question implements Serializable {
         return idQuestionnaire;
     }
 
-    public void setIdQuestionnaire(Questionnaire idQuestionnaire) {
-        this.idQuestionnaire = idQuestionnaire;
-    }
+
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Integer getOrder() {
-        return order;
+        return idOrder;
     }
 
-    public void setOrdem(Integer order) {
-        this.order = order;
-    }
 }

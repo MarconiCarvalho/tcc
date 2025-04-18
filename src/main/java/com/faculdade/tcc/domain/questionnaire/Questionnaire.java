@@ -14,10 +14,8 @@ import java.util.UUID;
 
 @Entity(name = "QUESTIONNAIRE_TABLE")
 @Table(name = "QUESTIONNAIRE_TABLE")
-@Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Questionnaire implements Serializable {
 
     @Serial
@@ -35,4 +33,34 @@ public class Questionnaire implements Serializable {
         this.description = data.description();
         this.creationDate = data.creationDate();
     }
+    public Questionnaire(){}
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
 }

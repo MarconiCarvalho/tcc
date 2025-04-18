@@ -6,9 +6,9 @@ import com.faculdade.tcc.domain.user.UserType;
 
 import java.util.UUID;
 
-public record UserResponseDTO(UUID id, String name, String email, String matricula, UserType role) {
+public record UserResponseDTO(UUID id, String name, String email, String registration, UserType role) {
     public UserResponseDTO(User user){
-        this(user.getId(), user.getName(), user.getEmail(), user.getMatricula(), user.getRole());
+        this(user.getId(), user.getName(), user.getEmail(), user.getRegistration(), user.getRole());
     }
 
 

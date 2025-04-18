@@ -15,14 +15,11 @@ import java.util.UUID;
 
 @Entity(name = "ANSWERS_TABLE")
 @Table(name = "ANSWERS_TABLE")
-@Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Answers implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,4 +38,36 @@ public class Answers implements Serializable {
         this.idQuestion = data.idQuestion();
         this.idUser = data.idUser();
     }
+    public Answers(){
+
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public OptionAnswers getOption() {
+        return option;
+    }
+
+    public void setOption(OptionAnswers option) {
+        this.option = option;
+    }
+
+    public Question getIdQuestion() {
+        return idQuestion;
+    }
+
+    public void setIdQuestion(Question idQuestion) {
+        this.idQuestion = idQuestion;
+    }
+
+    public User getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(User idUser) {
+        this.idUser = idUser;
+    }
+
 }
