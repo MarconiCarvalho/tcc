@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -30,5 +31,15 @@ public class UserController {
         List<User> users = userService.findAllUsers();
         List<UserResponseDTO> response = users.stream().map(UserResponseDTO::new).toList();
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody UserRequestDTO userRequestDTO){
+        User updateUser = userService.updateUser(id, userRequestDTO);
+        if(updateUser != null){
+            return new ResponseEntity<>(updateUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

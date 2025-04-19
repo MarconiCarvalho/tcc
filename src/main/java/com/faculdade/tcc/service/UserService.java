@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -14,6 +16,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+
 
     public User createUser(UserRequestDTO data){
         User newUser = new User(data);
@@ -29,13 +33,23 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public User findUserById(Long id) throws Exception {
-        return this.userRepository.findById(id).orElseThrow(() -> new Exception("User not found"));
+    public User findUserById(UUID id) throws Exception {
+        return (User) this.userRepository.findById(id).orElseThrow(() -> new Exception("User not found"));
     }
-
-
-    public void deleteUser(Long id)  {
+    public void deleteUser(UUID id)  {
         this.userRepository.deleteById(id);
     }
 
+    public User updateUser(UUID id, UserRequestDTO userRequestDTO){
+        Optional<Object> existingUser = userRepository.findById(id);
+        if (existingUser.isPresent()){
+            User user = (User) existingUser.get();
+            user.setName(userRequestDTO.name());
+            user.setEmail(userRequestDTO.email());
+            user.setRegistration(userRequestDTO.registration());
+            user.setRole(userRequestDTO.role());
+            return userRepository.save(user);
+        }
+        return null;
+    }
 }
