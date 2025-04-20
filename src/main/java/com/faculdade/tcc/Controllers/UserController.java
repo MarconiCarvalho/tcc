@@ -33,12 +33,32 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<User> findUserById(@PathVariable UUID id) throws Exception {
+        User user = userService.findUserById(id);
+        if(user != null){
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody UserRequestDTO userRequestDTO){
         User updateUser = userService.updateUser(id, userRequestDTO);
         if(updateUser != null){
             return new ResponseEntity<>(updateUser, HttpStatus.OK);
         } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
+        boolean deleted = userService.deleteUser(id);
+        if(deleted){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

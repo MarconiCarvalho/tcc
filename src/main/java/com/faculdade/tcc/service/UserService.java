@@ -3,6 +3,7 @@ package com.faculdade.tcc.service;
 import com.faculdade.tcc.Repositories.UserRepository;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.user.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,15 +30,23 @@ public class UserService {
         this.userRepository.save(user);
     }
 
+
     public List<User> findAllUsers(){
         return this.userRepository.findAll();
     }
 
+
     public User findUserById(UUID id) throws Exception {
         return (User) this.userRepository.findById(id).orElseThrow(() -> new Exception("User not found"));
     }
-    public void deleteUser(UUID id)  {
-        this.userRepository.deleteById(id);
+
+    @Transactional
+    public boolean deleteUser(UUID id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     public User updateUser(UUID id, UserRequestDTO userRequestDTO){
