@@ -36,16 +36,12 @@ public class User {
     private User updateBy;
     private LocalDateTime updateAt;
     @Enumerated(EnumType.STRING)
-    private UserType role;
+    private UserType role ;
 
     public User(UserRequestDTO data){
         this.name = data.name();
         this.email = data.email();
         this.registration = data.registration();
-        this.createBy = data.createBy();
-        this.createAt = data.createAt();
-        this.updateBy = data.updateBy();
-        this.updateAt = data.updateAt();
         this.role = data.role();
     }
 
@@ -61,6 +57,11 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setUpdateBy(User updateBy){
+        this.updateBy = updateBy;
+    }
+
     public LocalDateTime getUpdateAt() {
         return updateAt;
     }
