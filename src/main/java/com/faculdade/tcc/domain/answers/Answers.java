@@ -4,10 +4,7 @@ import com.faculdade.tcc.domain.dtos.requests.AnswersRequestDTO;
 import com.faculdade.tcc.domain.question.Question;
 import com.faculdade.tcc.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,6 +13,7 @@ import java.util.UUID;
 @Entity(name = "ANSWERS_TABLE")
 @Table(name = "ANSWERS_TABLE")
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Answers implements Serializable {
 
     @Serial

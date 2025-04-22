@@ -7,9 +7,18 @@ import com.faculdade.tcc.domain.user.UserType;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record UserResponseDTO(UUID id, String name, String email, String registration, User createBy, LocalDateTime createAt, User updateBy, LocalDateTime updateAt, UserType role) {
+public record UserResponseDTO(UUID id, String name, String email, String registration, UUID createBy, LocalDateTime createAt, UUID updateBy, LocalDateTime updateAt, UserType role) {
     public UserResponseDTO(User user){
-        this(user.getId(), user.getName(), user.getEmail(), user.getRegistration(), user.getCreateBy(), user.getCreateAt(), user.getUpdateBy(), user.getUpdateAt(), user.getRole());
+        this(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getRegistration(),
+                user.getCreateBy() != null ? user.getCreateBy().getId() : null,
+                user.getCreateAt(),
+                user.getUpdateBy() != null ? user.getUpdateBy().getId() : null,
+                user.getUpdateAt(),
+                user.getRole());
     }
 
 

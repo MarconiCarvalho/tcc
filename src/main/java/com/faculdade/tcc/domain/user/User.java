@@ -28,11 +28,11 @@ public class User {
     @Column(unique = true)
     private String registration;
     @ManyToOne
-    @JoinColumn(name = "UserIdCreate")
+    @JoinColumn(name = "CreatorUserId")
     private User createBy;
     private LocalDateTime createAt;
     @ManyToOne
-    @JoinColumn(name = "UserIdUpdate")
+    @JoinColumn(name = "UpdaterUserId")
     private User updateBy;
     private LocalDateTime updateAt;
     @Enumerated(EnumType.STRING)

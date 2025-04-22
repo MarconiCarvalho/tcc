@@ -1,11 +1,9 @@
 package com.faculdade.tcc.domain.questionnaire;
 
 import com.faculdade.tcc.domain.dtos.requests.QuestionnaireRequestDTO;
+import com.faculdade.tcc.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,6 +14,7 @@ import java.util.UUID;
 @Table(name = "QUESTIONNAIRE_TABLE")
 @Setter
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Questionnaire implements Serializable {
 
     @Serial
@@ -26,17 +25,55 @@ public class Questionnaire implements Serializable {
     private UUID id;
     private String title;
     private String description;
-    private LocalDateTime creationDate;
+    @JoinColumn(name = "CreatorUserId")
+    @ManyToOne
+    private User createBy;
+    private LocalDateTime createAt;
+    @JoinColumn(name = "UpdaterUserId")
+    @ManyToOne
+    private User updateBy;
+    private LocalDateTime updateAt;
 
     public Questionnaire(QuestionnaireRequestDTO data ){
         this.title = data.title();
         this.description = data.description();
-        this.creationDate = data.creationDate();
     }
     public Questionnaire(){}
 
     public UUID getId() {
         return id;
+    }
+
+    public User getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(User createBy) {
+        this.createBy = createBy;
+    }
+
+    public LocalDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    public User getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(User updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        this.updateAt = updateAt;
     }
 
     public String getTitle() {
@@ -55,12 +92,5 @@ public class Questionnaire implements Serializable {
         this.description = description;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
 
 }
