@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -54,6 +55,7 @@ public class UserService {
 
 
     public User findUserById(UUID id) throws Exception {
+        System.out.println("ID recebido: " + id);
         return (User) this.userRepository.findById(id).orElseThrow(() -> new Exception("User not found"));
     }
 

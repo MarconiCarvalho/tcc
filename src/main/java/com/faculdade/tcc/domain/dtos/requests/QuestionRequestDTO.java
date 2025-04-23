@@ -2,5 +2,7 @@ package com.faculdade.tcc.domain.dtos.requests;
 
 import com.faculdade.tcc.domain.questionnaire.Questionnaire;
 
-public record QuestionRequestDTO(Questionnaire idQuestionnaire, String description, Integer idOrder) {
+import java.util.UUID;
+
+public record QuestionRequestDTO(UUID idQuestionnaire, String description, Integer idOrder, UUID createBy, UUID updateBy) {
 }

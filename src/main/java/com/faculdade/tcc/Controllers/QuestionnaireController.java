@@ -22,7 +22,7 @@ public class QuestionnaireController {
     private QuestionnarieService questionnaireService;
 
     @PostMapping
-    public ResponseEntity<Questionnaire> createQuestionnire(@RequestBody QuestionnaireRequestDTO requestDTO) throws Exception {
+    public ResponseEntity<Questionnaire> createQuestionnaire(@RequestBody QuestionnaireRequestDTO requestDTO) throws Exception {
         Questionnaire newQuestionnaire = questionnaireService.createQuestionnarie(requestDTO);
         return new ResponseEntity<>(newQuestionnaire, HttpStatus.CREATED);
     }

@@ -34,9 +34,13 @@ public class QuestionnarieService  {
         newQuestionnarie.setDescription(questionnarieDTO.description());
 
         User creator = (User) userService.findUserById(questionnarieDTO.createBy());
-        User updater = (User) userService.findUserById(questionnarieDTO.updateBy());
+
+        if (questionnarieDTO.updateBy() != null){
+            User updater = (User) userService.findUserById(questionnarieDTO.updateBy());
+            newQuestionnarie.setUpdateBy(updater);
+        }
+
         newQuestionnarie.setCreateBy(creator);
-        newQuestionnarie.setUpdateBy(updater);
         newQuestionnarie.setCreateAt(LocalDateTime.now());
         newQuestionnarie.setUpdateAt(LocalDateTime.now());
         return this.questionnarieRepository.save(newQuestionnarie);
