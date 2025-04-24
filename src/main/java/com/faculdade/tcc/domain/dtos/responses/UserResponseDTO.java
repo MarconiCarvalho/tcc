@@ -14,9 +14,9 @@ public record UserResponseDTO(UUID id, String name, String email, String registr
                 user.getName(),
                 user.getEmail(),
                 user.getRegistration(),
-                user.getCreateBy() != null ? user.getCreateBy().getId() : null,
+                user.getCreateBy(),
                 user.getCreateAt(),
-                user.getUpdateBy() != null ? user.getUpdateBy().getId() : null,
+                user.getUpdateBy(),
                 user.getUpdateAt(),
                 user.getRole());
     }

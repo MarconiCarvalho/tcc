@@ -39,9 +39,9 @@ public class Question implements Serializable {
     private User updateBy;
     private LocalDateTime updateAt;
 
-    public Question(QuestionRequestDTO data){
-        this.description = data.description();
-        this.idOrder = data.idOrder();
+    public Question(QuestionRequestDTO questionRequestDTO){
+        this.description = questionRequestDTO.description();
+        this.idOrder = questionRequestDTO.idOrder();
     }
 
     public Question(){}

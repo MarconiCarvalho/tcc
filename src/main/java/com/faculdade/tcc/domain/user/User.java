@@ -27,13 +27,11 @@ public class User {
     private String email;
     @Column(unique = true)
     private String registration;
-    @ManyToOne
-    @JoinColumn(name = "CreatorUserId")
-    private User createBy;
+    @Column(name = "CreatorUserId")
+    private UUID createBy;
     private LocalDateTime createAt;
-    @ManyToOne
-    @JoinColumn(name = "UpdaterUserId")
-    private User updateBy;
+    @Column(name = "UpdaterUserId")
+    private UUID updateBy;
     private LocalDateTime updateAt;
     @Enumerated(EnumType.STRING)
     private UserType role ;
@@ -47,9 +45,10 @@ public class User {
 
     public User(){}
 
-    public UUID getId(){
+    public UUID getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
@@ -58,7 +57,7 @@ public class User {
         this.name = name;
     }
 
-    public void setUpdateBy(User updateBy){
+    public void setUpdateBy(UUID updateBy){
         this.updateBy = updateBy;
     }
 
@@ -69,7 +68,7 @@ public class User {
     public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
     }
-    public User getUpdateBy() {
+    public UUID getUpdateBy() {
         return updateBy;
     }
 
@@ -81,11 +80,11 @@ public class User {
         this.createAt = createAt;
     }
 
-    public User getCreateBy() {
+    public UUID getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(User createBy) {
+    public void setCreateBy( UUID createBy) {
         this.createBy = createBy;
     }
 

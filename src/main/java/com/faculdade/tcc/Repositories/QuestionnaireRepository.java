@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface QuestionnarieRepository extends JpaRepository<Questionnaire, UUID> {
+public interface QuestionnaireRepository extends JpaRepository<Questionnaire, UUID> {
     Optional<Questionnaire> findById(UUID id);
 
     void deleteById(UUID id);

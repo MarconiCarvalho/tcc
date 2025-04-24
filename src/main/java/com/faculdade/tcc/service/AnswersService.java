@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AnswersService {
@@ -28,7 +29,7 @@ public class AnswersService {
         return this.answersRepository.findAll();
     }
 
-    public Answers findById(Long id) throws Exception {
+    public Answers findById(UUID id) throws Exception {
        return this.answersRepository.findById(id).orElseThrow(() -> new Exception("Answer not found"));
     }
 

@@ -33,9 +33,7 @@ public class UserService {
         newUser.setRole(userRequestDTO.role());
 
         if (userRequestDTO.createBy() != null) {
-            User creator = (User) userRepository.findById(userRequestDTO.createBy())
-                    .orElseThrow(() -> new RuntimeException("Created Id not found"));
-            newUser.setCreateBy(creator);
+            newUser.setCreateBy(userRequestDTO.createBy());
         }
 
         newUser.setCreateAt(LocalDateTime.now());
@@ -54,10 +52,11 @@ public class UserService {
     }
 
 
-    public User findUserById(UUID id) throws Exception {
-        System.out.println("ID recebido: " + id);
-        return (User) this.userRepository.findById(id).orElseThrow(() -> new Exception("User not found"));
+    public User findUserById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
+
 
     @Transactional
     public boolean deleteUser(UUID id) {
@@ -69,18 +68,15 @@ public class UserService {
     }
 
     public User updateUser(UUID id, UserRequestDTO userRequestDTO){
-        User user = (User) userRepository.findById(id)
+
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User with ID: "+ id + " not found"));
 
-        User updater = (User) userRepository.findById(userRequestDTO.updateBy())
-                .orElseThrow(() -> new RuntimeException("User updater not found"));
-
+        user.setUpdateBy(userRequestDTO.updateBy());
         user.setName(userRequestDTO.name());
         user.setEmail(userRequestDTO.email());
         user.setRegistration(userRequestDTO.registration());
         user.setRole(userRequestDTO.role());
-
-        user.setUpdateBy(updater);
         user.setUpdateAt(LocalDateTime.now());
 
         return userRepository.save(user);

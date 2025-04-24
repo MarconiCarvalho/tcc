@@ -3,10 +3,15 @@ package com.faculdade.tcc.service;
 import com.faculdade.tcc.Repositories.QuestionRepository;
 import com.faculdade.tcc.domain.dtos.requests.QuestionRequestDTO;
 import com.faculdade.tcc.domain.question.Question;
+import com.faculdade.tcc.domain.questionnaire.Questionnaire;
+import com.faculdade.tcc.domain.user.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class QuestionService {
@@ -14,26 +19,68 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    private QuestionnarieService questionnaireService;
+    @Autowired
+    private UserService userService;
+
     public void saveQuestion(Question question){
-        this.saveQuestion(question);
+        this.questionRepository.save(question);
     }
 
-    public Question createUser(QuestionRequestDTO data){
-        Question newQuestion = new Question(data);
-        this.saveQuestion(newQuestion);
-        return newQuestion;
+    public Question createQuestion(QuestionRequestDTO questionRequestDTO) throws Exception {
+        Question newQuestion = new Question();
+
+        if(questionRequestDTO.idQuestionnaire() != null ) {
+            Questionnaire idQuestionnaire = (Questionnaire) questionnaireService.findById(questionRequestDTO.idQuestionnaire());
+            newQuestion.setIdQuestionnaire(idQuestionnaire);
+        }
+
+        User creator;
+        try {
+            creator = userService.findUserById(questionRequestDTO.createBy());
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao buscar usuário criador", e);
+        }
+
+        newQuestion.setCreateBy(creator);
+        newQuestion.setCreateAt(LocalDateTime.now());
+        newQuestion.setDescription(questionRequestDTO.description());
+        newQuestion.setIdOrder(questionRequestDTO.idOrder());
+        return questionRepository.save(newQuestion);
+    }
+    public Question updateQuestion(UUID id,QuestionRequestDTO questionRequestDTO){
+        Question newQuestion = (Question) questionRepository.findById(id).orElseThrow(() -> new RuntimeException("ID not found"));
+
+        if(questionRequestDTO.idQuestionnaire() != null){
+            Questionnaire idQuestionnaire = (Questionnaire) questionnaireService.findById(questionRequestDTO.idQuestionnaire());
+            newQuestion.setIdQuestionnaire(idQuestionnaire);
+        }
+
+        User updater = (User) userService.findUserById(questionRequestDTO.updateBy());
+
+        newQuestion.setUpdateBy(updater);
+        newQuestion.setUpdateAt(LocalDateTime.now());
+        newQuestion.setDescription(questionRequestDTO.description());
+        newQuestion.setIdOrder(questionRequestDTO.idOrder());
+        return questionRepository.save(newQuestion);
     }
 
     public List<Question> findAllQuestion(){
       return this.questionRepository.findAll();
     }
 
-    public void findById(Long id) throws Exception {
-        this.questionRepository.findById(id).orElseThrow(() -> new Exception("Question not found"));
-    }
+    public Question findById(UUID id) {
+       return (Question) this.questionRepository.findById(id).orElseThrow(() -> new RuntimeException("Question not found"));
+        }
 
-    public void deleteQuestionById(Long id){
-        this.questionRepository.deleteById(id);
+    @Transactional
+    public boolean deleteQuestionById(UUID id){
+        if( questionRepository.existsById(id)){
+            questionRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 

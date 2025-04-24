@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity(name = "ANSWERS_TABLE")
@@ -24,17 +25,18 @@ public class Answers implements Serializable {
     private UUID id;
     @Enumerated(EnumType.STRING)
     private OptionAnswers option;
-    @ManyToOne
-    @JoinColumn(name = "ID_QUESTION")
-    private Question idQuestion;
-    @ManyToOne
-    @JoinColumn(name = "ID_USER")
-    private User idUser;
+    @Column(name = "ID_QUESTION")
+    private UUID idQuestion;
+    @Column(name = "ID_USER")
+    private UUID idUser;
+    private UUID createBy;
+    private UUID updateBy;
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
 
     public Answers(AnswersRequestDTO data){
         this.option = data.option();
         this.idQuestion = data.idQuestion();
-        this.idUser = data.idUser();
     }
     public Answers(){
 
@@ -51,20 +53,52 @@ public class Answers implements Serializable {
     public void setOption(OptionAnswers option) {
         this.option = option;
     }
+    public UUID getCreateBy() {
+        return createBy;
+    }
 
-    public Question getIdQuestion() {
+    public void setCreateBy(UUID createBy) {
+        this.createBy = createBy;
+    }
+
+    public UUID getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(UUID updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public LocalDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        this.updateAt = updateAt;
+    }
+
+
+    public UUID getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(Question idQuestion) {
+    public void setIdQuestion(UUID idQuestion) {
         this.idQuestion = idQuestion;
     }
 
-    public User getIdUser() {
+    public UUID getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(User idUser) {
+    public void setIdUser(UUID idUser) {
         this.idUser = idUser;
     }
 

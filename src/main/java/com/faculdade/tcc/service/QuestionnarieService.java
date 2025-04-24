@@ -1,10 +1,8 @@
 package com.faculdade.tcc.service;
 
 
-import com.faculdade.tcc.Repositories.QuestionnarieRepository;
-import com.faculdade.tcc.Repositories.UserRepository;
+import com.faculdade.tcc.Repositories.QuestionnaireRepository;
 import com.faculdade.tcc.domain.dtos.requests.QuestionnaireRequestDTO;
-import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.questionnaire.Questionnaire;
 import com.faculdade.tcc.domain.user.User;
 import jakarta.transaction.Transactional;
@@ -19,57 +17,52 @@ import java.util.UUID;
 public class QuestionnarieService  {
 
     @Autowired
-    private QuestionnarieRepository questionnarieRepository;
+    private QuestionnaireRepository questionnaireRepository;
     @Autowired
     private UserService userService;
 
-    public void saveQuestionnarie(Questionnaire questionnarie){
-        this.questionnarieRepository.save(questionnarie);
+    public void saveQuestionnarie(Questionnaire questionnaire){
+        this.questionnaireRepository.save(questionnaire);
     }
 
     public Questionnaire createQuestionnarie(QuestionnaireRequestDTO questionnarieDTO) throws Exception {
         Questionnaire newQuestionnarie = new Questionnaire();
 
+
+
         newQuestionnarie.setTitle(questionnarieDTO.title());
         newQuestionnarie.setDescription(questionnarieDTO.description());
-
-        User creator = (User) userService.findUserById(questionnarieDTO.createBy());
-
-        if (questionnarieDTO.updateBy() != null){
-            User updater = (User) userService.findUserById(questionnarieDTO.updateBy());
-            newQuestionnarie.setUpdateBy(updater);
-        }
-
-        newQuestionnarie.setCreateBy(creator);
+        newQuestionnarie.setUpdateBy(questionnarieDTO.updateBy());
+        newQuestionnarie.setCreateBy(questionnarieDTO.createBy());
         newQuestionnarie.setCreateAt(LocalDateTime.now());
-        newQuestionnarie.setUpdateAt(LocalDateTime.now());
-        return this.questionnarieRepository.save(newQuestionnarie);
+        return this.questionnaireRepository.save(newQuestionnarie);
 
     }
 
     public Questionnaire updateQuestionnaire(UUID id, QuestionnaireRequestDTO questionnaireRequestDTO) throws Exception {
-        Questionnaire questionnaire = (Questionnaire) questionnarieRepository.findById(id).orElseThrow(() -> new RuntimeException("Questionnaire id not found"));
+        Questionnaire newQuestionnaire = (Questionnaire) questionnaireRepository.findById(id).orElseThrow(() -> new RuntimeException("Questionnaire id not found"));
 
-       User updater = (User) userService.findUserById(questionnaireRequestDTO.updateBy());
-        questionnaire.setTitle(questionnaireRequestDTO.title());
-        questionnaire.setDescription(questionnaireRequestDTO.description());
-        questionnaire.setUpdateBy(updater);
-        questionnaire.setUpdateAt(LocalDateTime.now());
-        return questionnarieRepository.save(questionnaire);
+
+        newQuestionnaire.setTitle(questionnaireRequestDTO.title());
+        newQuestionnaire.setDescription(questionnaireRequestDTO.description());
+        newQuestionnaire.setUpdateBy(questionnaireRequestDTO.updateBy());
+        newQuestionnaire.setUpdateAt(LocalDateTime.now());
+        return questionnaireRepository.save(newQuestionnaire);
     }
     public List<Questionnaire> findAllQuestionnarie(){
-        return this.questionnarieRepository.findAll();
+        return this.questionnaireRepository.findAll();
     }
 
 
     public Questionnaire findById(UUID id){
-        return (Questionnaire) this.questionnarieRepository.findById(id).orElseThrow(() -> new RuntimeException("Questionnaire found found"));
+        return questionnaireRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Questionnaire not  found"));
     }
 
     @Transactional
     public boolean deleteQuestionnarie(UUID id){
-        if(questionnarieRepository.existsById(id)){
-            questionnarieRepository.deleteById(id);
+        if(questionnaireRepository.existsById(id)){
+            questionnaireRepository.deleteById(id);
             return true;
         }
         return false;

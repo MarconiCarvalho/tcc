@@ -25,13 +25,11 @@ public class Questionnaire implements Serializable {
     private UUID id;
     private String title;
     private String description;
-    @JoinColumn(name = "CreatorUserId")
-    @ManyToOne
-    private User createBy;
+    @Column(name = "CreatorUserId ")
+    private UUID createBy;
     private LocalDateTime createAt;
-    @JoinColumn(name = "UpdaterUserId")
-    @ManyToOne
-    private User updateBy;
+    @Column(name = "UpdaterUserId")
+    private UUID updateBy;
     private LocalDateTime updateAt;
 
     public Questionnaire(QuestionnaireRequestDTO data ){
@@ -44,11 +42,11 @@ public class Questionnaire implements Serializable {
         return id;
     }
 
-    public User getCreateBy() {
+    public UUID getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(User createBy) {
+    public void setCreateBy(UUID createBy) {
         this.createBy = createBy;
     }
 
@@ -60,11 +58,11 @@ public class Questionnaire implements Serializable {
         this.createAt = createAt;
     }
 
-    public User getUpdateBy() {
+    public UUID getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(User updateBy) {
+    public void setUpdateBy(UUID updateBy) {
         this.updateBy = updateBy;
     }
 
