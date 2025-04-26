@@ -8,8 +8,8 @@ import com.faculdade.tcc.domain.user.User;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record AnswersResponseDTO(OptionAnswers option, UUID idQuestion, UUID idUser, UUID createBy, LocalDateTime createAt, UUID updateBy, LocalDateTime updateAt){
+public record AnswersResponseDTO(OptionAnswers option, UUID idQuestion, UUID userId, UUID createBy, LocalDateTime createAt){
     public AnswersResponseDTO(Answers answers){
-        this(answers.getOption(), answers.getIdQuestion(), answers.getIdUser(), answers.getCreateBy(), answers.getCreateAt(),answers.getUpdateBy(),answers.getUpdateAt());
+        this(answers.getOption(), answers.getIdQuestion(), answers.getUserId(), answers.getCreateBy(), answers.getCreateAt());
     }
 }

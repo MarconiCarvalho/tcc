@@ -29,37 +29,18 @@ public class QuestionService {
     }
 
     public Question createQuestion(QuestionRequestDTO questionRequestDTO) throws Exception {
-        Question newQuestion = new Question();
-
-        if(questionRequestDTO.idQuestionnaire() != null ) {
-            Questionnaire idQuestionnaire = (Questionnaire) questionnaireService.findById(questionRequestDTO.idQuestionnaire());
-            newQuestion.setIdQuestionnaire(idQuestionnaire);
-        }
-
-        User creator;
-        try {
-            creator = userService.findUserById(questionRequestDTO.createBy());
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao buscar usuário criador", e);
-        }
-
-        newQuestion.setCreateBy(creator);
+        Question newQuestion = new Question(questionRequestDTO);
         newQuestion.setCreateAt(LocalDateTime.now());
-        newQuestion.setDescription(questionRequestDTO.description());
-        newQuestion.setIdOrder(questionRequestDTO.idOrder());
         return questionRepository.save(newQuestion);
     }
     public Question updateQuestion(UUID id,QuestionRequestDTO questionRequestDTO){
         Question newQuestion = (Question) questionRepository.findById(id).orElseThrow(() -> new RuntimeException("ID not found"));
 
         if(questionRequestDTO.idQuestionnaire() != null){
-            Questionnaire idQuestionnaire = (Questionnaire) questionnaireService.findById(questionRequestDTO.idQuestionnaire());
-            newQuestion.setIdQuestionnaire(idQuestionnaire);
+           newQuestion.setIdQuestionnaire(questionRequestDTO.idQuestionnaire());
         }
 
-        User updater = (User) userService.findUserById(questionRequestDTO.updateBy());
-
-        newQuestion.setUpdateBy(updater);
+        newQuestion.setUpdateBy(questionRequestDTO.updateBy());
         newQuestion.setUpdateAt(LocalDateTime.now());
         newQuestion.setDescription(questionRequestDTO.description());
         newQuestion.setIdOrder(questionRequestDTO.idOrder());

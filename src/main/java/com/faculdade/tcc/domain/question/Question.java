@@ -25,23 +25,24 @@ public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @ManyToOne
-    @JoinColumn(name = "ID_QUESTIONNAIRE")
-    private Questionnaire idQuestionnaire;
+
+    @Column(name = "ID_QUESTIONNAIRE")
+    private UUID idQuestionnaire;
     private String description;
     private Integer idOrder;
-    @JoinColumn(name = "CreatorUserID")
-    @ManyToOne
-    private User createBy;
+    @Column(name = "CreatorUserID")
+    private UUID createBy;
     private LocalDateTime createAt;
-    @JoinColumn(name = "UpdaterUserId")
-    @ManyToOne
-    private User updateBy;
+    @Column(name = "UpdaterUserId")
+    private UUID updateBy;
     private LocalDateTime updateAt;
 
-    public Question(QuestionRequestDTO questionRequestDTO){
-        this.description = questionRequestDTO.description();
-        this.idOrder = questionRequestDTO.idOrder();
+    public Question(QuestionRequestDTO data){
+        this.description = data.description();
+        this.idQuestionnaire = data.idQuestionnaire();
+        this.idOrder = data.idOrder();
+        this.createBy = data.createBy();
+        this.updateBy = data.updateBy();
     }
 
     public Question(){}
@@ -51,15 +52,15 @@ public class Question implements Serializable {
         return id;
     }
 
-    public Questionnaire getIdQuestionnaire() {
+    public UUID getIdQuestionnaire() {
         return idQuestionnaire;
     }
 
-    public User getCreateBy() {
+    public UUID getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(User createBy) {
+    public void setCreateBy(UUID createBy) {
         this.createBy = createBy;
     }
 
@@ -67,7 +68,7 @@ public class Question implements Serializable {
         return createAt;
     }
 
-    public void setIdQuestionnaire(Questionnaire idQuestionnaire) {
+    public void setIdQuestionnaire(UUID idQuestionnaire) {
         this.idQuestionnaire = idQuestionnaire;
     }
 
@@ -83,11 +84,11 @@ public class Question implements Serializable {
         this.createAt = createAt;
     }
 
-    public User getUpdateBy() {
+    public UUID getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(User updateBy) {
+    public void setUpdateBy(UUID updateBy) {
         this.updateBy = updateBy;
     }
 

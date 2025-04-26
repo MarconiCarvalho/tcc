@@ -26,22 +26,16 @@ public class QuestionnarieService  {
     }
 
     public Questionnaire createQuestionnarie(QuestionnaireRequestDTO questionnarieDTO) throws Exception {
-        Questionnaire newQuestionnarie = new Questionnaire();
 
-
-
-        newQuestionnarie.setTitle(questionnarieDTO.title());
-        newQuestionnarie.setDescription(questionnarieDTO.description());
-        newQuestionnarie.setUpdateBy(questionnarieDTO.updateBy());
-        newQuestionnarie.setCreateBy(questionnarieDTO.createBy());
+        Questionnaire newQuestionnarie = new Questionnaire(questionnarieDTO);
         newQuestionnarie.setCreateAt(LocalDateTime.now());
-        return this.questionnaireRepository.save(newQuestionnarie);
+        return questionnaireRepository.save(newQuestionnarie);
 
     }
 
     public Questionnaire updateQuestionnaire(UUID id, QuestionnaireRequestDTO questionnaireRequestDTO) throws Exception {
-        Questionnaire newQuestionnaire = (Questionnaire) questionnaireRepository.findById(id).orElseThrow(() -> new RuntimeException("Questionnaire id not found"));
 
+        Questionnaire newQuestionnaire = (Questionnaire) questionnaireRepository.findById(id).orElseThrow(() -> new RuntimeException("Questionnaire id not found"));
 
         newQuestionnaire.setTitle(questionnaireRequestDTO.title());
         newQuestionnaire.setDescription(questionnaireRequestDTO.description());

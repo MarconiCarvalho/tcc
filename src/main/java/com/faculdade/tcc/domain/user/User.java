@@ -41,6 +41,8 @@ public class User {
         this.email = data.email();
         this.registration = data.registration();
         this.role = data.role();
+        this.createBy = data.createBy();
+        this.updateBy = data.updateBy();
     }
 
     public User(){}

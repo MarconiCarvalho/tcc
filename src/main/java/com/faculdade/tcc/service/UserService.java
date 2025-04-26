@@ -25,25 +25,16 @@ public class UserService {
 
     public User createUser(UserRequestDTO userRequestDTO) {
 
-        User newUser = new User();
-
-        newUser.setName(userRequestDTO.name());
-        newUser.setEmail(userRequestDTO.email());
-        newUser.setRegistration(userRequestDTO.registration());
-        newUser.setRole(userRequestDTO.role());
-
-        if (userRequestDTO.createBy() != null) {
-            newUser.setCreateBy(userRequestDTO.createBy());
-        }
-
+        User newUser = new User(userRequestDTO);
         newUser.setCreateAt(LocalDateTime.now());
-        return userRepository.save(newUser);
+        this.saveUser(newUser);
+        return newUser;
 
     }
 
-    public User saveUser(User user){
+    public void saveUser(User user){
         this.userRepository.save(user);
-        return user;
+
     }
 
 
