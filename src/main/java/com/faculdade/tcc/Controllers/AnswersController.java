@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/Answers")
+@RequestMapping("/answers")
 public class AnswersController {
 
     @Autowired
@@ -43,15 +43,7 @@ public class AnswersController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Answers> updateAnswers(@PathVariable UUID id, @RequestBody AnswersRequestDTO answersRequestDTO){
-        Answers updateAnswers = answersService.updateAnswers(id , answersRequestDTO);
-        if (updateAnswers != null){
-            return new ResponseEntity<>(updateAnswers, HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAnswers(@PathVariable UUID id){
         boolean deleted = answersService.deleteAnswers(id);

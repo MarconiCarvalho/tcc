@@ -7,5 +7,5 @@ import com.faculdade.tcc.domain.user.User;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record AnswersRequestDTO(OptionAnswers option, UUID idQuestion, UUID userId, UUID createBy, LocalDateTime createAt) {
+public record AnswersRequestDTO(OptionAnswers option, UUID idQuestion, UUID userId, UUID createBy) {
 }

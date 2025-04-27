@@ -26,7 +26,7 @@ public class Answers implements Serializable {
     @Enumerated(EnumType.STRING)
     private OptionAnswers option;
     @Column(name = "UserRespostaID")
-    private UUID UserId;
+    private UUID userId;
     @Column(name = "ID_QUESTION")
     private UUID idQuestion;
     @Column(name = "CreatorUserId")
@@ -37,6 +37,7 @@ public class Answers implements Serializable {
     private LocalDateTime updateAt;
 
     public Answers(AnswersRequestDTO data){
+        this.userId = data.userId();
         this.option = data.option();
         this.idQuestion = data.idQuestion();
         this.createBy = data.createBy();
@@ -68,19 +69,20 @@ public class Answers implements Serializable {
     public UUID getUpdateBy() {
         return updateBy;
     }
-    public UUID getUserId() {
-        return UserId;
-    }
 
-    public void setUserId(UUID userId) {
-        UserId = userId;
-    }
     public void setUpdateBy(UUID updateBy) {
         this.updateBy = updateBy;
     }
 
     public LocalDateTime getCreateAt() {
         return createAt;
+    }
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
 
     public void setCreateAt(LocalDateTime createAt) {
@@ -94,7 +96,6 @@ public class Answers implements Serializable {
     public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
     }
-
 
     public UUID getIdQuestion() {
         return idQuestion;
