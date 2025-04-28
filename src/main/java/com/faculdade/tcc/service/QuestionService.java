@@ -39,8 +39,11 @@ public class QuestionService {
         if(questionRequestDTO.idQuestionnaire() != null){
            newQuestion.setIdQuestionnaire(questionRequestDTO.idQuestionnaire());
         }
-
-        newQuestion.setUpdateBy(questionRequestDTO.updateBy());
+        if (!questionRepository.existsById(questionRequestDTO.updateBy())){
+            newQuestion.setUpdateBy(questionRequestDTO.updateBy());
+        } else {
+            throw new RuntimeException("updater id not found");
+        }
         newQuestion.setUpdateAt(LocalDateTime.now());
         newQuestion.setDescription(questionRequestDTO.description());
         newQuestion.setIdOrder(questionRequestDTO.idOrder());

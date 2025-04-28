@@ -22,7 +22,6 @@ public class AnswersService {
 
     public Answers createAnswers(AnswersRequestDTO data){
         Answers newAnswers = new Answers(data);
-        newAnswers.setUserId(data.userId());
         newAnswers.setCreateAt(LocalDateTime.now());
         this.saveAnswers(newAnswers);
         return newAnswers;

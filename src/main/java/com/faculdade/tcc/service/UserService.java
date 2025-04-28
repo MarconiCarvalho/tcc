@@ -32,11 +32,10 @@ public class UserService {
 
     }
 
-    public void saveUser(User user){
+    public void saveUser(User user) {
         this.userRepository.save(user);
 
     }
-
 
     public List<User> findAllUsers(){
         return this.userRepository.findAll();
@@ -63,7 +62,11 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User with ID: "+ id + " not found"));
 
-        user.setUpdateBy(userRequestDTO.updateBy());
+        if (!userRepository.existsById(userRequestDTO.updateBy())){
+            user.setUpdateBy(userRequestDTO.updateBy());
+        }else {
+            throw new RuntimeException("UserUpdater not found");
+        }
         user.setName(userRequestDTO.name());
         user.setEmail(userRequestDTO.email());
         user.setRegistration(userRequestDTO.registration());

@@ -37,9 +37,14 @@ public class QuestionnarieService  {
 
         Questionnaire newQuestionnaire = (Questionnaire) questionnaireRepository.findById(id).orElseThrow(() -> new RuntimeException("Questionnaire id not found"));
 
+        if (!questionnaireRepository.existsById(questionnaireRequestDTO.updateBy())){
+            newQuestionnaire.setUpdateBy(questionnaireRequestDTO.updateBy());
+        } else{
+            throw new RuntimeException("updater id not found");
+        }
+
         newQuestionnaire.setTitle(questionnaireRequestDTO.title());
         newQuestionnaire.setDescription(questionnaireRequestDTO.description());
-        newQuestionnaire.setUpdateBy(questionnaireRequestDTO.updateBy());
         newQuestionnaire.setUpdateAt(LocalDateTime.now());
         return questionnaireRepository.save(newQuestionnaire);
     }
