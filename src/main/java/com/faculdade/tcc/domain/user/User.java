@@ -47,9 +47,19 @@ public class User implements UserDetails {
         this.name = data.name();
         this.email = data.email();
         this.registration = data.registration();
+        this.password = data.password();
         this.role = data.role();
         this.createBy = data.createBy();
         this.updateBy = data.updateBy();
+    }
+
+    public User(String name, String registration, String email, String encryptedPassword, UserType role, UUID createBy){
+        this.name = name;
+        this.registration = registration;
+        this.email = email;
+        this.password = encryptedPassword;
+        this.role = role;
+        this.createBy = createBy;
     }
 
     public User(){}
@@ -104,6 +114,9 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRegistration() {
