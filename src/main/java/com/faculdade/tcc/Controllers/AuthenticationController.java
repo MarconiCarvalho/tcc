@@ -5,6 +5,7 @@ import com.faculdade.tcc.domain.dtos.requests.AuthenticationDTO;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.dtos.responses.LoginResponseDTO;
 import com.faculdade.tcc.domain.user.User;
+import com.faculdade.tcc.domain.user.UserType;
 import com.faculdade.tcc.infra.security.TokenService;
 import com.faculdade.tcc.service.UserService;
 import jakarta.validation.Valid;
@@ -42,8 +43,8 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody @Valid UserRequestDTO userRequestDTO){
+    @PostMapping("/register/users")
+    public ResponseEntity<User> registerStudent(@RequestBody @Valid UserRequestDTO userRequestDTO){
         if (this.userRepository.findByEmail(userRequestDTO.email()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(userRequestDTO.password());
