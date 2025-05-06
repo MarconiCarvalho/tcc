@@ -4,6 +4,7 @@ import com.faculdade.tcc.Repositories.UserRepository;
 import com.faculdade.tcc.domain.dtos.requests.AuthenticationDTO;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.dtos.responses.LoginResponseDTO;
+import com.faculdade.tcc.domain.resetPassword.TokenPassword;
 import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.domain.user.UserType;
 import com.faculdade.tcc.infra.security.TokenService;
@@ -59,6 +60,5 @@ public class AuthenticationController {
         this.userService.saveUser(newUser);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
-
 
 }
