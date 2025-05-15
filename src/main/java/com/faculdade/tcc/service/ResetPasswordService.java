@@ -1,6 +1,8 @@
 package com.faculdade.tcc.service;
-import com.faculdade.tcc.Repositories.TokenPasswordRepository;
-import com.faculdade.tcc.domain.resetPassword.TokenPassword;
+
+import com.faculdade.tcc.EmailPassword.domain.ResetPassword;
+import com.faculdade.tcc.Repositories.ResetPasswordRepository;
+import com.faculdade.tcc.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,21 +13,31 @@ import java.util.UUID;
 public class ResetPasswordService {
 
     @Autowired
-    private TokenPasswordRepository tokenPasswordRepository;
+    private ResetPasswordRepository resetRepository;
 
-public TokenPassword createPasswordResetToken(UUID userId){
+    @Autowired
+    private UserService userService;
 
-    TokenPassword token = new TokenPassword();
+    public void saveToken(ResetPassword resetPassword){
+        this.resetRepository.save(resetPassword);
+    }
 
-    token.setUserId(userId);
-    token.setToken(UUID.randomUUID().toString());
-    token.setCreatedAt(LocalDateTime.now());
-    token.setExpiresAt(LocalDateTime.now().plusMinutes(15));
-    token.setUsed(false);
+    public String generateToken(String email){
+        User userToken = userService.findUserByEmail(email);
 
-    return tokenPasswordRepository.save(token);
+        if (userToken == null){
+            throw new RuntimeException("User with e-mail " +email + " não encontrado.");
+        }
+        String token = UUID.randomUUID().toString();
+        ResetPassword generateToken = new ResetPassword();
+        generateToken.setToken(token);
+        generateToken.setUserId(userToken.getId());
+        generateToken.setCreateAt(LocalDateTime.now());
+        generateToken.setUsed(false);
+        generateToken.setExpiresAt(LocalDateTime.now().plusMinutes(15));
 
-
-}
+        resetRepository.save(generateToken);
+        return token;
+    }
 
 }

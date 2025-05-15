@@ -1,30 +1,34 @@
-package com.faculdade.tcc.domain.resetPassword;
+package com.faculdade.tcc.EmailPassword.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
-@Table
-public class TokenPassword implements Serializable {
+@Entity(name = "RESET_TABLE")
+@Table(name = "RESET_TABLE")
+@AllArgsConstructor
+@NoArgsConstructor
+public class ResetPassword implements Serializable {
 
-    private static final long serialVersion = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private UUID userId;
     private String token;
-    private LocalDateTime createdAt;
+    private LocalDateTime createAt;
     private LocalDateTime expiresAt;
-    private boolean used = false;
 
     public UUID getId() {
         return id;
     }
-
     public UUID getUserId() {
         return userId;
     }
@@ -41,12 +45,12 @@ public class TokenPassword implements Serializable {
         this.token = token;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreateAt() {
+        return createAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
     }
 
     public LocalDateTime getExpiresAt() {
@@ -64,4 +68,8 @@ public class TokenPassword implements Serializable {
     public void setUsed(boolean used) {
         this.used = used;
     }
+
+    private boolean used;
+
+
 }

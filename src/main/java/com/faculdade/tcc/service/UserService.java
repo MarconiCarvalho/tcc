@@ -5,13 +5,9 @@ import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.user.User;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -45,6 +41,10 @@ public class UserService {
     public User findUserById(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+    public User findUserByEmail(String email){
+        return (User) userRepository.findByEmail(email)
+                .orElseThrow(()-> new RuntimeException("User not found"));
     }
 
 

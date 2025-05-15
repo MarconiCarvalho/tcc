@@ -43,12 +43,10 @@ public class TokenService {
         }catch(JWTVerificationException exception){
                 return "";
         }
+
     }
 
     private Instant genExpirationDate(){
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
-    }
-    private Instant updatePassword(){
-        return LocalDateTime.now().plusMinutes(15).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusDays(30).toInstant(ZoneOffset.of("-03:00"));
     }
 }

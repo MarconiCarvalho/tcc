@@ -29,7 +29,7 @@ public class SecurityConfigurations{
                 .authorizeHttpRequests(authorize -> authorize
                         //ROTAS PUBLICAS
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/auth/updatepassword").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/password/forgot").permitAll()
                         //ROTAS USERS
                         .requestMatchers(HttpMethod.POST,"/answers").hasAnyRole("STUDENT","TEACHER", "TECHNICIANS")
                         .requestMatchers(HttpMethod.GET,"/questions").hasAnyRole("STUDENT", "TEACHER", "TECHNICIANS", "ADMIN")
