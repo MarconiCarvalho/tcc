@@ -44,7 +44,7 @@ public class AuthenticationController {
 
     @PostMapping("/register/users")
     public ResponseEntity<User> registerStudent(@RequestBody @Valid UserRequestDTO userRequestDTO){
-        if (this.userRepository.findByEmail(userRequestDTO.email()) != null) return ResponseEntity.badRequest().build();
+        if (this.userRepository.findByEmail(userRequestDTO.email()).isPresent()) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(userRequestDTO.password());
         User newUser = new User(

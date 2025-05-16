@@ -13,7 +13,7 @@ public class EmailProducer {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @Value("${spring.rabbit.queue}")
+    @Value("${spring.rabbitmq.queue}")
     private String queue;
 
     public void publishMessage(Email email){rabbitTemplate.convertAndSend(queue, email);}

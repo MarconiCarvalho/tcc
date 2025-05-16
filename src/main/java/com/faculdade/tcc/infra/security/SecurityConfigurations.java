@@ -29,14 +29,16 @@ public class SecurityConfigurations{
                 .authorizeHttpRequests(authorize -> authorize
                         //ROTAS PUBLICAS
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/password/forgot").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/password/").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/email/updatePassword").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/email").permitAll()
                         //ROTAS USERS
                         .requestMatchers(HttpMethod.POST,"/answers").hasAnyRole("STUDENT","TEACHER", "TECHNICIANS")
                         .requestMatchers(HttpMethod.GET,"/questions").hasAnyRole("STUDENT", "TEACHER", "TECHNICIANS", "ADMIN")
                         //ROTAS ADMINS
 
                         //USERS
-                        .requestMatchers(HttpMethod.POST,"/auth/register/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/auth/register/users").permitAll()
                         .requestMatchers(HttpMethod.PUT,"/users").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/users").hasRole("ADMIN")
                         //QUESTIONS

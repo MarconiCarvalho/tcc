@@ -1,5 +1,7 @@
 package com.faculdade.tcc.service;
 
+import com.faculdade.tcc.EmailPassword.domain.Email;
+import com.faculdade.tcc.EmailPassword.producers.EmailProducer;
 import com.faculdade.tcc.Repositories.UserRepository;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.user.User;
@@ -16,20 +18,31 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EmailProducer emailProducer;
 
-
-
-    public User createUser(UserRequestDTO userRequestDTO) {
-
-        User newUser = new User(userRequestDTO);
-        newUser.setCreateAt(LocalDateTime.now());
-        this.saveUser(newUser);
-        return newUser;
-
-    }
 
     public void saveUser(User user) {
         this.userRepository.save(user);
+
+    }
+
+
+    public User createUser(UserRequestDTO userRequestDTO) {
+        Email newEmail = new Email();
+        User newUser = new User(userRequestDTO);
+        String password = UUID.randomUUID().toString();
+
+        newUser.setPassword(password);
+        saveUser(newUser);
+
+        newEmail.setOwnerRef("API-CATOLICA");
+        newEmail.setEmailTo(userRequestDTO.email());
+        newEmail.setEmailFrom("marconi.junior.ana@gmail.com");
+        newEmail.setSubject("Password: ");
+        newEmail.setText("Sua senha: " + password);
+        emailProducer.publishMessage(newEmail);
+        return newUser;
 
     }
 

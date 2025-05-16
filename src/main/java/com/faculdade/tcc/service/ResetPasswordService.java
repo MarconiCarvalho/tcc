@@ -18,7 +18,7 @@ public class ResetPasswordService {
     @Autowired
     private UserService userService;
 
-    public void saveToken(ResetPassword resetPassword){
+    public void saveToken(ResetPassword resetPassword) {
         this.resetRepository.save(resetPassword);
     }
 
@@ -38,6 +38,9 @@ public class ResetPasswordService {
 
         resetRepository.save(generateToken);
         return token;
+    }
+    public ResetPassword findByToken(String token){
+        return this.resetRepository.findByToken(token);
     }
 
 }
