@@ -4,6 +4,8 @@ import com.faculdade.tcc.EmailPassword.domain.ResetPassword;
 import com.faculdade.tcc.Repositories.ResetPasswordRepository;
 import com.faculdade.tcc.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,7 +16,6 @@ public class ResetPasswordService {
 
     @Autowired
     private ResetPasswordRepository resetRepository;
-
     @Autowired
     private UserService userService;
 
@@ -38,6 +39,19 @@ public class ResetPasswordService {
 
         resetRepository.save(generateToken);
         return token;
+    }
+
+    public void validateToken(String token){
+        ResetPassword tokenPassword = findByToken(token);
+        if(tokenPassword == null){
+            new RuntimeException("Invalid Token");
+        }
+        if(tokenPassword.isUsed()){
+            new RuntimeException("Used Token");
+        }
+        if(tokenPassword.getExpiresAt().isBefore(LocalDateTime.now())){
+            new RuntimeException("Expirad Token");
+        }
     }
     public ResetPassword findByToken(String token){
         return this.resetRepository.findByToken(token);

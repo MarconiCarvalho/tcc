@@ -9,11 +9,9 @@ import com.faculdade.tcc.service.ResetPasswordService;
 import com.faculdade.tcc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 
@@ -43,11 +41,8 @@ public class EmailController {
             emailSend.setEmailTo(email);
             emailSend.setSubject("Link para redefinição de senha");
             emailSend.setText("Link para redefinição de senha:\n\n" +
-                    "http://localhost:8080/updatepassword?token=" + token);
-
-            System.out.println(email);
-            System.out.println(emailSend.getEmailFrom());
-            emailProducer.publishMessage(emailSend);
+                    "http://localhost:8080/email/updatepassword?token=" + token);
+            emailProducer.listenPasswordReset(emailSend);
 
             return new ResponseEntity<>("Email sent successfully!", HttpStatus.CREATED);
         }catch (RuntimeException e){
@@ -59,15 +54,6 @@ public class EmailController {
     public ResponseEntity<String> resetPassword(@RequestParam("token") String token,
                                                 @RequestBody Map<String, String> body){
         ResetPassword tokenPassword = resetPasswordService.findByToken(token);
-        if(tokenPassword == null){
-            return new ResponseEntity<>("Token invalid.", HttpStatus.BAD_REQUEST);
-        }
-        if(tokenPassword.isUsed()){
-            return new ResponseEntity<>("Token Used",HttpStatus.BAD_REQUEST);
-        }
-        if(tokenPassword.getExpiresAt().isBefore(LocalDateTime.now())){
-            return new ResponseEntity<>("Token expired.", HttpStatus.BAD_REQUEST);
-        }
 
         UUID userId = tokenPassword.getUserId();
         User user = userService.findUserById(userId);
@@ -80,7 +66,8 @@ public class EmailController {
             return new ResponseEntity<>("New password is mandatory", HttpStatus.BAD_REQUEST);
         }
 
-        user.setPassword(newPassword);
+        String encryptedPassword = new BCryptPasswordEncoder().encode(newPassword);
+        user.setPassword(encryptedPassword);
         userService.saveUser(user);
 
         tokenPassword.setUsed(true);

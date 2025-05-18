@@ -9,12 +9,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfigs {
 
-    @Value("${spring.rabbitmq.queue}")
-    private String queue;
+    @Value("${spring.rabbitmq.queue.account-created}")
+    private String accountCreatedQueue;
+
+    @Value("${spring.rabbitmq.queue.password-reset}")
+    private String passwordResetQueue;
 
     @Bean
-    public Queue queue(){return new Queue(queue, true);}
+    public Queue accountCreatedQueue() {
+        return new Queue(accountCreatedQueue, true);
+    }
 
     @Bean
-    public Jackson2JsonMessageConverter messageConverter(){return new Jackson2JsonMessageConverter();}
+    public Queue passwordResetQueue() {
+        return new Queue(passwordResetQueue, true);
+    }
+
+    @Bean
+    public Jackson2JsonMessageConverter messageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
 }
+

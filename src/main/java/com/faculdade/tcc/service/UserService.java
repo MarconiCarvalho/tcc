@@ -41,7 +41,7 @@ public class UserService {
         newEmail.setEmailFrom("marconi.junior.ana@gmail.com");
         newEmail.setSubject("Password: ");
         newEmail.setText("Sua senha: " + password);
-        emailProducer.publishMessage(newEmail);
+        emailProducer.listenAccountCreated(newEmail);
         return newUser;
 
     }

@@ -4,5 +4,5 @@ import com.faculdade.tcc.domain.questionnaire.Questionnaire;
 
 import java.util.UUID;
 
-public record QuestionRequestDTO(UUID idQuestionnaire, String description, Integer idOrder, UUID createBy, UUID updateBy) {
+public record QuestionRequestDTO(UUID idQuestionnaire, String description, Integer idOrder) {
 }

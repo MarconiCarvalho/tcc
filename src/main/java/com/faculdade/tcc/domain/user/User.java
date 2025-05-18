@@ -49,7 +49,7 @@ public class User implements UserDetails {
         this.registration = data.registration();
         this.password = data.password();
         this.role = data.role();
-        this.createBy = data.createBy();
+        this.createBy = data.createBy(userId);
         this.updateBy = data.updateBy();
     }
 

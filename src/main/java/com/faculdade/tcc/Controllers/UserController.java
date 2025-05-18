@@ -1,14 +1,19 @@
 package com.faculdade.tcc.Controllers;
 
+import com.faculdade.tcc.Repositories.UserRepository;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.dtos.responses.UserResponseDTO;
 import com.faculdade.tcc.domain.user.User;
+import com.faculdade.tcc.infra.jwt.JwtUtils;
 import com.faculdade.tcc.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,11 +23,24 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
 
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserRequestDTO user){
-        User newUser = userService.createUser(user);
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody @Valid UserRequestDTO userRequestDTO){
+        if (this.userRepository.findByEmail(userRequestDTO.email()).isPresent()) return ResponseEntity.badRequest().build();
+        UUID userId = JwtUtils.getUserIdFromToken();
+        String encryptedPassword = new BCryptPasswordEncoder().encode(userRequestDTO.password());
+        User newUser = new User(
+                userRequestDTO.name(),
+                userRequestDTO.registration(),
+                userRequestDTO.email(),
+                encryptedPassword,
+                userRequestDTO.role());
+        newUser.setCreateBy(userId);
+        newUser.setCreateAt(LocalDateTime.now());
+        this.userService.saveUser(newUser);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 

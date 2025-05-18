@@ -11,11 +11,18 @@ import org.springframework.stereotype.Component;
 public class EmailConsumer {
 
     @Autowired
-    EmailService emailService;
+    private EmailService emailService;
 
-    @RabbitListener(queues = "${spring.rabbitmq.queue}")
-    public void listen(@Payload Email email){
+    @RabbitListener(queues = "${spring.rabbitmq.queue.account-created}")
+    public void listenAccountCreated(@Payload Email email){
         emailService.sendEmail(email);
         System.out.println("Email Status: " + email.getStatusEmail());
     }
+
+    @RabbitListener(queues = "${spring.rabbitmq.queue.password-reset}")
+    public void listenPasswordReset(@Payload Email email){
+        emailService.sendEmail(email);
+        System.out.println("Email Status: " + email.getStatusEmail());
+    }
+
 }

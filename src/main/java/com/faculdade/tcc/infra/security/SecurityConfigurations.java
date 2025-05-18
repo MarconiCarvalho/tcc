@@ -30,7 +30,7 @@ public class SecurityConfigurations{
                         //ROTAS PUBLICAS
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST,"/password/").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/email/updatePassword").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/email/updatepassword").permitAll()
                         .requestMatchers(HttpMethod.POST,"/email").permitAll()
                         //ROTAS USERS
                         .requestMatchers(HttpMethod.POST,"/answers").hasAnyRole("STUDENT","TEACHER", "TECHNICIANS")

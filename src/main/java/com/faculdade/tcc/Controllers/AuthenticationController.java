@@ -42,21 +42,5 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
-    @PostMapping("/register/users")
-    public ResponseEntity<User> registerStudent(@RequestBody @Valid UserRequestDTO userRequestDTO){
-        if (this.userRepository.findByEmail(userRequestDTO.email()).isPresent()) return ResponseEntity.badRequest().build();
-
-        String encryptedPassword = new BCryptPasswordEncoder().encode(userRequestDTO.password());
-        User newUser = new User(
-                userRequestDTO.name(),
-                userRequestDTO.registration(),
-                userRequestDTO.email(),
-                encryptedPassword,
-                userRequestDTO.role(),
-                userRequestDTO.createBy());
-        newUser.setCreateAt(LocalDateTime.now());
-        this.userService.saveUser(newUser);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
-    }
 
 }
