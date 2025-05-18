@@ -49,11 +49,9 @@ public class User implements UserDetails {
         this.registration = data.registration();
         this.password = data.password();
         this.role = data.role();
-        this.createBy = data.createBy(userId);
-        this.updateBy = data.updateBy();
     }
 
-    public User(String name, String registration, String email, String encryptedPassword, UserType role, UUID createBy){
+    public User(String name, String registration, String email, String encryptedPassword, UserType role){
         this.name = name;
         this.registration = registration;
         this.email = email;

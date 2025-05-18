@@ -5,6 +5,7 @@ import com.faculdade.tcc.EmailPassword.producers.EmailProducer;
 import com.faculdade.tcc.Repositories.UserRepository;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.user.User;
+import com.faculdade.tcc.infra.jwt.JwtUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,12 +75,9 @@ public class UserService {
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User with ID: "+ id + " not found"));
+        UUID updateBy = JwtUtils.getUserIdFromToken();
 
-        if (!userRepository.existsById(userRequestDTO.updateBy())){
-            user.setUpdateBy(userRequestDTO.updateBy());
-        }else {
-            throw new RuntimeException("UserUpdater not found");
-        }
+        user.setUpdateBy(updateBy);
         user.setName(userRequestDTO.name());
         user.setEmail(userRequestDTO.email());
         user.setRegistration(userRequestDTO.registration());

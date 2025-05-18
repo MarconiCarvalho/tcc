@@ -38,7 +38,7 @@ public class SecurityConfigurations{
                         //ROTAS ADMINS
 
                         //USERS
-                        .requestMatchers(HttpMethod.POST,"/auth/register/users").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/users/register").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT,"/users").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE,"/users").hasRole("ADMIN")
                         //QUESTIONS

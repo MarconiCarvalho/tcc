@@ -3,6 +3,7 @@ package com.faculdade.tcc.service;
 import com.faculdade.tcc.Repositories.AnswersRepository;
 import com.faculdade.tcc.domain.answers.Answers;
 import com.faculdade.tcc.domain.dtos.requests.AnswersRequestDTO;
+import com.faculdade.tcc.infra.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class AnswersService {
 
     public Answers createAnswers(AnswersRequestDTO data){
         Answers newAnswers = new Answers(data);
+
+        UUID userId = JwtUtils.getUserIdFromToken();
+
+        newAnswers.setCreateBy(userId);
         newAnswers.setCreateAt(LocalDateTime.now());
         this.saveAnswers(newAnswers);
         return newAnswers;

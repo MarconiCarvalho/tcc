@@ -5,6 +5,7 @@ import com.faculdade.tcc.domain.dtos.requests.QuestionRequestDTO;
 import com.faculdade.tcc.domain.question.Question;
 import com.faculdade.tcc.domain.questionnaire.Questionnaire;
 import com.faculdade.tcc.domain.user.User;
+import com.faculdade.tcc.infra.jwt.JwtUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,8 @@ public class QuestionService {
 
     public Question createQuestion(QuestionRequestDTO questionRequestDTO) throws Exception {
         Question newQuestion = new Question(questionRequestDTO);
+        UUID userId = JwtUtils.getUserIdFromToken();
+        newQuestion.setCreateBy(userId);
         newQuestion.setCreateAt(LocalDateTime.now());
         return questionRepository.save(newQuestion);
     }
@@ -39,11 +42,10 @@ public class QuestionService {
         if(questionRequestDTO.idQuestionnaire() != null){
            newQuestion.setIdQuestionnaire(questionRequestDTO.idQuestionnaire());
         }
-        if (!questionRepository.existsById(questionRequestDTO.updateBy())){
-            newQuestion.setUpdateBy(questionRequestDTO.updateBy());
-        } else {
-            throw new RuntimeException("updater id not found");
-        }
+
+        UUID updateId = JwtUtils.getUserIdFromToken();
+
+        newQuestion.setUpdateBy(updateId);
         newQuestion.setUpdateAt(LocalDateTime.now());
         newQuestion.setDescription(questionRequestDTO.description());
         newQuestion.setIdOrder(questionRequestDTO.idOrder());

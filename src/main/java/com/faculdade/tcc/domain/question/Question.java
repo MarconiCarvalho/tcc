@@ -41,8 +41,6 @@ public class Question implements Serializable {
         this.description = data.description();
         this.idQuestionnaire = data.idQuestionnaire();
         this.idOrder = data.idOrder();
-        this.createBy = data.createBy();
-        this.updateBy = data.updateBy();
     }
 
     public Question(){}

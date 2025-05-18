@@ -35,8 +35,6 @@ public class Questionnaire implements Serializable {
     public Questionnaire(QuestionnaireRequestDTO data ){
         this.title = data.title();
         this.description = data.description();
-        this.createBy = data.createBy();
-        this.updateBy = data.updateBy();
     }
     public Questionnaire(){}
 

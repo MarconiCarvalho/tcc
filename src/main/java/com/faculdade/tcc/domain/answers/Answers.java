@@ -40,8 +40,6 @@ public class Answers implements Serializable {
         this.userId = data.userId();
         this.option = data.option();
         this.idQuestion = data.idQuestion();
-        this.createBy = data.createBy();
-
     }
     public Answers(){
 
