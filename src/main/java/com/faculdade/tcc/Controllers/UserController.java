@@ -32,12 +32,7 @@ public class UserController {
         if (this.userRepository.findByEmail(userRequestDTO.email()).isPresent()) return ResponseEntity.badRequest().build();
         UUID userId = JwtUtils.getUserIdFromToken();
         String encryptedPassword = new BCryptPasswordEncoder().encode(userRequestDTO.password());
-        User newUser = new User(
-                userRequestDTO.name(),
-                userRequestDTO.registration(),
-                userRequestDTO.email(),
-                encryptedPassword,
-                userRequestDTO.role());
+        User newUser = new User(userRequestDTO);
         newUser.setCreateBy(userId);
         newUser.setCreateAt(LocalDateTime.now());
         this.userService.saveUser(newUser);

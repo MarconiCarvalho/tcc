@@ -29,7 +29,6 @@ public class SecurityConfigurations{
                 .authorizeHttpRequests(authorize -> authorize
                         //ROTAS PUBLICAS
                         .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/password/").permitAll()
                         .requestMatchers(HttpMethod.POST,"/email/updatepassword").permitAll()
                         .requestMatchers(HttpMethod.POST,"/email").permitAll()
                         //ROTAS USERS
