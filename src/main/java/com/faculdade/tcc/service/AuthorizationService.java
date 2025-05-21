@@ -1,6 +1,6 @@
 package com.faculdade.tcc.service;
 
-import com.faculdade.tcc.Repositories.UserRepository;
+import com.faculdade.tcc.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.faculdade.tcc.Controllers;
+package com.faculdade.tcc.controllers;
 
 import com.faculdade.tcc.domain.dtos.requests.QuestionRequestDTO;
 import com.faculdade.tcc.domain.question.Question;

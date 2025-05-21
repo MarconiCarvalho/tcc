@@ -1,4 +1,4 @@
-package com.faculdade.tcc.EmailPassword.enums;
+package com.faculdade.tcc.domain.email.enums;
 
 public enum StatusEmail {
     SENT,

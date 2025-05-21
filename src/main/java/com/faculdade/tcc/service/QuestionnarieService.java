@@ -1,10 +1,9 @@
 package com.faculdade.tcc.service;
 
 
-import com.faculdade.tcc.Repositories.QuestionnaireRepository;
+import com.faculdade.tcc.repositories.QuestionnaireRepository;
 import com.faculdade.tcc.domain.dtos.requests.QuestionnaireRequestDTO;
 import com.faculdade.tcc.domain.questionnaire.Questionnaire;
-import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.infra.jwt.JwtUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,9 @@
 package com.faculdade.tcc.service;
 
-import com.faculdade.tcc.EmailPassword.domain.ResetPassword;
-import com.faculdade.tcc.Repositories.ResetPasswordRepository;
+import com.faculdade.tcc.controllers.ResetPassword;
+import com.faculdade.tcc.repositories.ResetPasswordRepository;
 import com.faculdade.tcc.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

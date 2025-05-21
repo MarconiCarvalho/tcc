@@ -1,5 +1,5 @@
 package com.faculdade.tcc.infra.security;
-import com.faculdade.tcc.Repositories.UserRepository;
+import com.faculdade.tcc.repositories.UserRepository;
 import com.faculdade.tcc.domain.user.User;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,6 +1,6 @@
-package com.faculdade.tcc.EmailPassword.domain;
+package com.faculdade.tcc.domain.email;
 
-import com.faculdade.tcc.EmailPassword.enums.StatusEmail;
+import com.faculdade.tcc.domain.email.enums.StatusEmail;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

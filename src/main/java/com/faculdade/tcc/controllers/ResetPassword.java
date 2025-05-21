@@ -1,4 +1,4 @@
-package com.faculdade.tcc.EmailPassword.domain;
+package com.faculdade.tcc.controllers;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +25,7 @@ public class ResetPassword implements Serializable {
     private String token;
     private LocalDateTime createAt;
     private LocalDateTime expiresAt;
+    private boolean used;
 
     public UUID getId() {
         return id;
@@ -69,7 +70,7 @@ public class ResetPassword implements Serializable {
         this.used = used;
     }
 
-    private boolean used;
+
 
 
 }

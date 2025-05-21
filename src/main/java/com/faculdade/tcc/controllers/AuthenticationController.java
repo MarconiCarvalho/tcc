@@ -1,22 +1,17 @@
-package com.faculdade.tcc.Controllers;
+package com.faculdade.tcc.controllers;
 
-import com.faculdade.tcc.Repositories.UserRepository;
+import com.faculdade.tcc.repositories.UserRepository;
 import com.faculdade.tcc.domain.dtos.requests.AuthenticationDTO;
-import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.dtos.responses.LoginResponseDTO;
 import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.infra.security.TokenService;
 import com.faculdade.tcc.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/auth")

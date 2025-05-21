@@ -1,10 +1,8 @@
-package com.faculdade.tcc.Controllers;
+package com.faculdade.tcc.controllers;
 
 import com.faculdade.tcc.domain.answers.Answers;
 import com.faculdade.tcc.domain.dtos.requests.AnswersRequestDTO;
-import com.faculdade.tcc.domain.dtos.requests.QuestionRequestDTO;
 import com.faculdade.tcc.domain.dtos.responses.AnswersResponseDTO;
-import com.faculdade.tcc.domain.question.Question;
 import com.faculdade.tcc.service.AnswersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

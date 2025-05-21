@@ -1,6 +1,6 @@
-package com.faculdade.tcc.EmailPassword.consumers;
+package com.faculdade.tcc.consumers;
 
-import com.faculdade.tcc.EmailPassword.domain.Email;
+import com.faculdade.tcc.domain.email.Email;
 import com.faculdade.tcc.service.EmailService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;

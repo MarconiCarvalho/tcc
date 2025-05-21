@@ -1,8 +1,8 @@
 package com.faculdade.tcc.service;
 
-import com.faculdade.tcc.EmailPassword.domain.Email;
-import com.faculdade.tcc.EmailPassword.producers.EmailProducer;
-import com.faculdade.tcc.Repositories.UserRepository;
+import com.faculdade.tcc.domain.email.Email;
+import com.faculdade.tcc.producers.EmailProducer;
+import com.faculdade.tcc.repositories.UserRepository;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.infra.jwt.JwtUtils;

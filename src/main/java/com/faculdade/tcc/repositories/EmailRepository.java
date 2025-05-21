@@ -1,6 +1,6 @@
-package com.faculdade.tcc.Repositories;
+package com.faculdade.tcc.repositories;
 
-import com.faculdade.tcc.EmailPassword.domain.Email;
+import com.faculdade.tcc.domain.email.Email;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

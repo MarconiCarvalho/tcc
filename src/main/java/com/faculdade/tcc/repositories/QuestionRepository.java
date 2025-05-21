@@ -1,4 +1,4 @@
-package com.faculdade.tcc.Repositories;
+package com.faculdade.tcc.repositories;
 
 import com.faculdade.tcc.domain.question.Question;
 import org.springframework.data.jpa.repository.JpaRepository;

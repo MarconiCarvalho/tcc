@@ -1,6 +1,6 @@
 package com.faculdade.tcc.service;
 
-import com.faculdade.tcc.Repositories.AnswersRepository;
+import com.faculdade.tcc.repositories.AnswersRepository;
 import com.faculdade.tcc.domain.answers.Answers;
 import com.faculdade.tcc.domain.dtos.requests.AnswersRequestDTO;
 import com.faculdade.tcc.infra.jwt.JwtUtils;

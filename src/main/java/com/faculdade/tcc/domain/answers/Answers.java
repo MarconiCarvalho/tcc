@@ -31,10 +31,7 @@ public class Answers implements Serializable {
     private UUID idQuestion;
     @Column(name = "CreatorUserId")
     private UUID createBy;
-    @Column(name = "UpdatorUserBy")
-    private UUID updateBy;
     private LocalDateTime createAt;
-    private LocalDateTime updateAt;
 
     public Answers(AnswersRequestDTO data){
         this.userId = data.userId();

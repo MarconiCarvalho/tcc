@@ -1,8 +1,7 @@
-package com.faculdade.tcc.Controllers;
+package com.faculdade.tcc.controllers;
 
-import com.faculdade.tcc.EmailPassword.domain.Email;
-import com.faculdade.tcc.EmailPassword.domain.ResetPassword;
-import com.faculdade.tcc.EmailPassword.producers.EmailProducer;
+import com.faculdade.tcc.domain.email.Email;
+import com.faculdade.tcc.producers.EmailProducer;
 import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.service.EmailService;
 import com.faculdade.tcc.service.ResetPasswordService;

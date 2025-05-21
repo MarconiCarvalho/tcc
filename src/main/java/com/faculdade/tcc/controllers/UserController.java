@@ -1,6 +1,6 @@
-package com.faculdade.tcc.Controllers;
+package com.faculdade.tcc.controllers;
 
-import com.faculdade.tcc.Repositories.UserRepository;
+import com.faculdade.tcc.repositories.UserRepository;
 import com.faculdade.tcc.domain.dtos.requests.UserRequestDTO;
 import com.faculdade.tcc.domain.dtos.responses.UserResponseDTO;
 import com.faculdade.tcc.domain.user.User;

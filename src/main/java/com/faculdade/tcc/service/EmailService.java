@@ -1,9 +1,8 @@
 package com.faculdade.tcc.service;
 
-import com.faculdade.tcc.EmailPassword.domain.Email;
-import com.faculdade.tcc.EmailPassword.enums.StatusEmail;
-import com.faculdade.tcc.Repositories.EmailRepository;
-import com.faculdade.tcc.domain.dtos.responses.EmailResponse;
+import com.faculdade.tcc.domain.email.Email;
+import com.faculdade.tcc.domain.email.enums.StatusEmail;
+import com.faculdade.tcc.repositories.EmailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;

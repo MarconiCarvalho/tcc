@@ -1,11 +1,9 @@
-package com.faculdade.tcc.Controllers;
+package com.faculdade.tcc.controllers;
 
 import com.faculdade.tcc.domain.dtos.requests.QuestionnaireRequestDTO;
 import com.faculdade.tcc.domain.dtos.responses.QuestionnaireResponseDTO;
 import com.faculdade.tcc.domain.questionnaire.Questionnaire;
-import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.service.QuestionnarieService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
