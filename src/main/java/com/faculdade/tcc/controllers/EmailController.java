@@ -1,5 +1,6 @@
 package com.faculdade.tcc.controllers;
 
+import com.faculdade.tcc.domain.resetPassword.ResetPassword;
 import com.faculdade.tcc.domain.email.Email;
 import com.faculdade.tcc.producers.EmailProducer;
 import com.faculdade.tcc.domain.user.User;

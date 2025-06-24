@@ -1,4 +1,4 @@
-package com.faculdade.tcc.controllers;
+package com.faculdade.tcc.domain.resetPassword;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

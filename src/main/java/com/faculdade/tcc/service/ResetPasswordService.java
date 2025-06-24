@@ -1,6 +1,6 @@
 package com.faculdade.tcc.service;
 
-import com.faculdade.tcc.controllers.ResetPassword;
+import com.faculdade.tcc.domain.resetPassword.ResetPassword;
 import com.faculdade.tcc.repositories.ResetPasswordRepository;
 import com.faculdade.tcc.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
