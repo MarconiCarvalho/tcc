@@ -1,7 +1,6 @@
 package com.faculdade.tcc.domain.dtos.responses;
 
 import com.faculdade.tcc.domain.questionnaire.Questionnaire;
-import com.faculdade.tcc.domain.user.User;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

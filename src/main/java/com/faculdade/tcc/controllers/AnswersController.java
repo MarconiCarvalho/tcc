@@ -4,6 +4,8 @@ import com.faculdade.tcc.domain.answers.Answers;
 import com.faculdade.tcc.domain.dtos.requests.AnswersRequestDTO;
 import com.faculdade.tcc.domain.dtos.responses.AnswersResponseDTO;
 import com.faculdade.tcc.service.AnswersService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,18 +16,21 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/answers")
+@Tag(name = "Resposta", description = "API para gerenciar respostas")
 public class AnswersController {
 
     @Autowired
     private AnswersService answersService;
 
     @PostMapping
+    @Operation(summary = "Cria resposta", description = "Retorna a resposta com HttpStatus")
     public ResponseEntity<Answers> createAnswers(@RequestBody AnswersRequestDTO answersRequestDTO){
         Answers newAnswers = answersService.createAnswers(answersRequestDTO);
         return new ResponseEntity<>(newAnswers, HttpStatus.CREATED);
     }
 
     @GetMapping
+    @Operation(summary = "Lista todas as respostas")
     public ResponseEntity<List<AnswersResponseDTO>> findAllAnswers(){
         List<Answers> answers = answersService.findAllAnswers();
         List<AnswersResponseDTO> response =  answers.stream().map(AnswersResponseDTO :: new).toList();
@@ -33,6 +38,7 @@ public class AnswersController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Busca questão por ID")
     public ResponseEntity<Answers>findByIdAnswers(@PathVariable UUID id) throws Exception {
         Answers answers = answersService.findById(id);
         if(answers != null){
@@ -41,7 +47,7 @@ public class AnswersController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+/*
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAnswers(@PathVariable UUID id){
         boolean deleted = answersService.deleteAnswers(id);
@@ -51,6 +57,6 @@ public class AnswersController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
+*/
 
 }

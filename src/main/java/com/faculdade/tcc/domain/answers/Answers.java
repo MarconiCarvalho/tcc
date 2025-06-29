@@ -53,6 +53,7 @@ public class Answers implements Serializable {
     public void setOption(OptionAnswers option) {
         this.option = option;
     }
+
     public UUID getCreateBy() {
         return createBy;
     }
@@ -61,17 +62,10 @@ public class Answers implements Serializable {
         this.createBy = createBy;
     }
 
-    public UUID getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(UUID updateBy) {
-        this.updateBy = updateBy;
-    }
-
     public LocalDateTime getCreateAt() {
         return createAt;
     }
+
     public UUID getUserId() {
         return userId;
     }
@@ -82,14 +76,6 @@ public class Answers implements Serializable {
 
     public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
-    }
-
-    public LocalDateTime getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(LocalDateTime updateAt) {
-        this.updateAt = updateAt;
     }
 
     public UUID getIdQuestion() {

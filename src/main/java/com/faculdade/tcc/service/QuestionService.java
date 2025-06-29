@@ -42,7 +42,6 @@ public class QuestionService {
         }
 
         UUID updateId = JwtUtils.getUserIdFromToken();
-
         newQuestion.setUpdateBy(updateId);
         newQuestion.setUpdateAt(LocalDateTime.now());
         newQuestion.setDescription(questionRequestDTO.description());
@@ -58,6 +57,9 @@ public class QuestionService {
        return (Question) this.questionRepository.findById(id).orElseThrow(() -> new RuntimeException("Question not found"));
         }
 
+    public List<Question> findByIdQuestionnaire(UUID questionnaireId){
+        return this.questionRepository.findByIdQuestionnaire(questionnaireId);
+    }
     @Transactional
     public boolean deleteQuestionById(UUID id){
         if( questionRepository.existsById(id)){

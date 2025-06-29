@@ -6,6 +6,8 @@ import com.faculdade.tcc.domain.dtos.responses.UserResponseDTO;
 import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.infra.jwt.JwtUtils;
 import com.faculdade.tcc.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name= "Usuário", description = "API para gerenciar Usuarios")
 public class UserController {
 
     @Autowired
@@ -28,6 +31,7 @@ public class UserController {
 
 
     @PostMapping("/register")
+    @Operation(summary = "Registra um novo Usuário", description = "Retorna o usuario com um HttpStatus")
     public ResponseEntity<User> registerUser(@RequestBody @Valid UserRequestDTO userRequestDTO){
         if (this.userRepository.findByEmail(userRequestDTO.email()).isPresent()) return ResponseEntity.badRequest().build();
         UUID userId = JwtUtils.getUserIdFromToken();
@@ -40,6 +44,7 @@ public class UserController {
     }
 
     @GetMapping
+    @Operation(summary = "Lista todos os Usuários", description = "Retorna um DTO com uma lista de Usuários")
     public ResponseEntity<List<UserResponseDTO>> findAllUsers(){
         List<User> users = userService.findAllUsers();
         List<UserResponseDTO> response = users.stream().map(UserResponseDTO::new).toList();
@@ -47,6 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Busca Usuário por id", description = "Retorna o Usuário com HttpStatus")
     public ResponseEntity<User> findUserById(@PathVariable UUID id) throws Exception {
         User user = userService.findUserById(id);
         if(user != null){
@@ -57,6 +63,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualiza Usuários por id ")
     public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody UserRequestDTO userRequestDTO){
         User updateUser = userService.updateUser(id, userRequestDTO);
         if(updateUser != null){
@@ -67,6 +74,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Deleta Usuários por id")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
         boolean deleted = userService.deleteUser(id);
         if(deleted){

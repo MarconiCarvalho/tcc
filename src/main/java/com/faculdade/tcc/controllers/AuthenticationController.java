@@ -6,6 +6,7 @@ import com.faculdade.tcc.domain.dtos.responses.LoginResponseDTO;
 import com.faculdade.tcc.domain.user.User;
 import com.faculdade.tcc.infra.security.TokenService;
 import com.faculdade.tcc.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Login", description ="API para gerenciar o login dos Usuarios")
 public class AuthenticationController {
 
     @Autowired
