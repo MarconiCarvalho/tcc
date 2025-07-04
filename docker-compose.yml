@@ -1,0 +1,83 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-tcc
+    environment:
+      POSTGRES_DB: tcc
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 147852
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - private_network
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-tcc
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - private_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-tcc
+    ports:
+      - "5050:5050"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@tcc.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    depends_on:
+      - postgres
+    networks:
+      - private_network
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: springboot-tcc
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tcc
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SECRET_KEY: SECRET_TCC_JWT435
+      SPRING_MAIL_USERNAME: marconi.junior.ana10@gmail.com
+      TOKEN_EMAIL: ylwt zqio axuz jrfs
+      URL_RABBITMQ: amqp://guest:guest@rabbitmq:5672
+    networks:
+      - private_network
+      - public_network
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    networks:
+      - private_network
+
+networks:
+  private_network:
+    driver: bridge
+  public_network:
+    driver: bridge
+
+volumes:
+
+  pgdata:
+
+  jenkins_home:
+
